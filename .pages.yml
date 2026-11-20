@@ -1,0 +1,52 @@
+media:
+  input: images/blog
+  output: /images/blog
+  rename: safe
+content:
+  - name: posts
+    label: Journal articles
+    type: collection
+    path: content/posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, published]
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: category
+        label: Topic
+        type: select
+        required: true
+        options:
+          values:
+            - Movement & Sensory Play
+            - Speech & Connection
+            - Learning Through Play
+      - name: summary
+        label: Short description for the article list
+        type: text
+        required: true
+      - name: cover
+        label: Cover image (optional)
+        type: image
+        options:
+          rename: safe
+      - name: published
+        label: Show on website
+        type: boolean
+      - name: body
+        label: Article text
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          path: images/blog
+          rename: safe
