@@ -1,46 +1,50 @@
-KITE & WONDER — THE WONDER JOURNAL
-================================================
-This is a FULL PROJECT, not a normal Netlify Drop ZIP.
+KITE & WONDER — WONDER JOURNAL
 
-GOAL
-Publish articles from a phone via Pages CMS. Posts you save there will be
-written to GitHub, and Netlify will automatically build your live website.
+Edytor: https://kite-wonder-website.netlify.app/admin/
+Artykuły: https://kite-wonder-website.netlify.app/journal/
 
-ONE-TIME SETUP (preferably from a computer):
-1. Create a FREE GitHub account: https://github.com/signup
-2. Create a new private GitHub repository (for example kite-wonder-site).
-3. Upload ALL of the files from this ZIP into the ROOT of the repository.
-   Keep .pages.yml, netlify.toml, index.html and the folders in place.
-   If GitHub web upload skips hidden files, create .pages.yml separately.
-4. In Netlify, connect your GitHub repo to a website.
-   The netlify.toml automatically specifies how the site is built.
-   Note: if your existing site was published by manual drag-and-drop,
-   check its site settings or choose a new site and later move the domain;
-   simply uploading this ZIP with Netlify Drop will NOT activate a CMS.
-5. Go to https://app.pagescms.org and log in with GitHub.
-   Authorize the Pages CMS GitHub App for the repository.
-6. Open Journal articles in Pages CMS. Add title, date, category,
-   short description, optional cover picture and article body.
-   Turn 'Show on website' on, then save.
-7. Netlify will automatically publish the updated journal from GitHub.
+DODAWANIE I PUBLIKOWANIE
+1. Otwórz edytor i zaloguj się przez GitHub.
+2. Wybierz Wonder Journal Articles, następnie New Article.
+3. Wpisz Title (tytuł), Publication date (datę), Category (kategorię),
+   Summary (krótki opis) i Article (treść). Cover image jest opcjonalne.
+4. Szkic: zostaw Show on website wyłączone i użyj Publish / Publish now,
+   aby zapisać tekst w repozytorium. Przycisk zapisuje plik; o obecności
+   w Journal decyduje przełącznik Show on website.
+5. Gotowy artykuł: włącz Show on website i użyj Publish / Publish now.
+6. Poczekaj na udane wdrożenie w Netlify (zwykle kilka minut), a potem
+   otwórz /journal/. Samo zapisanie w edytorze nie kończy wdrożenia.
 
-DRAFTS
-An example post in content/posts/sample-draft.md is not public.
-Keep 'Show on website' off until an article is ready.
+EDYCJA I WYCOFANIE
+Otwórz artykuł na liście, zmień treść i ponownie zapisz.
+Aby wycofać publikację, wyłącz Show on website i zapisz. Po udanym
+wdrożeniu zniknie zarówno karta na liście, jak i osobna strona artykułu.
+Publication date służy do wyświetlania i sortowania; nie jest harmonogramem.
 
-SITE URLs
-Homepage: / | Blog index: /journal/ | Individual article: /journal/<slug>/
+WAŻNE O SZKICACH
+Oba obecne przykładowe teksty pozostają szkicami (published: false).
+Nie publikuj ich jako gotowych artykułów. Niewidoczność szkicu w Journal
+nie oznacza prywatności: repozytorium GitHub jest publiczne.
 
-WHAT YOU SHOULD NOT DO
-- Do not delete .pages.yml or netlify.toml.
-- Do not continue manual ZIP updates after switching to automatic deployment.
-- Do not share your GitHub password or authorization codes.
+DLA OSOBY UTRZYMUJĄCEJ STRONĘ
+Źródło produkcyjne: main w KiteWonder/kite-wonder-website.
+Netlify: pip install -r requirements.txt && python -m unittest discover -s tests -v && python scripts/build_blog.py
+Katalog publikowany: public
+Decap: admin/index.html + admin/config.yml; GitHub OAuth obsługuje
+ dotychczasowy dostawca Netlify. Sekretów nie umieszczamy w kodzie.
+Generator kopiuje admin przy każdym wdrożeniu i generuje /journal/
+oraz /journal/<nazwa-pliku>/ tylko dla published: true.
+Strona główna index.html i style Journal pozostają bez zmian.
 
-PROJECT CONTENT
-- index.html: your current published book catalogue plus Journal section
-- content/posts/: articles
-- images/blog/: uploaded article images
-- .pages.yml: edit fields shown in Pages CMS
-- scripts/build_blog.py: page generation logic
-- netlify.toml: automatic build settings
-- public/: generated output for Netlify, created on deploy; not in source ZIP
+WERSJE PODGLĄDOWE I TESTY
+Przed scaleniem zmian do main sprawdź Deploy Preview z pull requestu.
+CMS w Deploy Preview zapisuje do gałęzi HEAD tego podglądu, nie do main.
+Podgląd używa istniejącej ochrony dostępu Netlify; nie wyłączaj jej do testów.
+Testy automatyczne tworzą artykuły wyłącznie w katalogu tymczasowym,
+sprawdzają zapis, publikację, edycję, wycofanie, usunięcie i obrazki,
+a następnie sprzątają po sobie. Treści testowe nie trafiają do public.
+
+Zmiany na main uruchamiają produkcyjne wdrożenie po stronie Netlify.
+Scalanie tej poprawki wymaga wcześniejszego zatwierdzenia właścicielki.
+Końcowy test logowania i zapisu przez CMS wymaga zalogowanej sesji GitHub;
+pełny test publicznego wdrożenia można zakończyć dopiero po zatwierdzeniu.

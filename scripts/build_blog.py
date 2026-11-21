@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import date,datetime
 from html import escape
 from urllib.parse import quote
-import re, shutil, yaml, mistune
+import os, re, shutil, yaml, mistune
 
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'public'
@@ -14,6 +14,24 @@ POSTS=ROOT/'content'/'posts'
 if DIST.exists(): shutil.rmtree(DIST)
 (DIST/'journal').mkdir(parents=True,exist_ok=True)
 shutil.copy2(ROOT/'index.html',DIST/'index.html')
+shutil.copytree(ROOT/'admin',DIST/'admin',dirs_exist_ok=True)
+
+# A preview editor must never save test content to the production branch.
+# Netlify HEAD is the source branch (BRANCH can be the PR's target branch).
+if os.environ.get('CONTEXT') in ('deploy-preview','branch-deploy'):
+    branch=os.environ.get('HEAD','').strip()
+    if not branch or branch == 'main':
+        raise ValueError('Preview CMS requires a non-production HEAD branch.')
+    config_path=DIST/'admin'/'config.yml'
+    config=yaml.safe_load(config_path.read_text(encoding='utf-8'))
+    config['backend']['branch']=branch
+    preview_url=os.environ.get('DEPLOY_PRIME_URL','').strip()
+    if preview_url:
+        config['site_url']=preview_url
+        config['display_url']=preview_url+'/journal/'
+    config['collections'][0]['description']='WERSJA PODGLĄDOWA: zapisy trafiają tylko do gałęzi testowej. Nie zmieniają strony publicznej.'
+    config_path.write_text(yaml.safe_dump(config,allow_unicode=True,sort_keys=False),encoding='utf-8')
+
 for folder in ['assets','images']:
     p=ROOT/folder
     if p.exists(): shutil.copytree(p,DIST/folder,dirs_exist_ok=True)
