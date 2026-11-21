@@ -14,6 +14,7 @@ POSTS=ROOT/'content'/'posts'
 if DIST.exists(): shutil.rmtree(DIST)
 (DIST/'journal').mkdir(parents=True,exist_ok=True)
 shutil.copy2(ROOT/'index.html',DIST/'index.html')
+if (ROOT/'admin').exists(): shutil.copytree(ROOT/'admin',DIST/'admin',dirs_exist_ok=True)
 for folder in ['assets','images']:
     p=ROOT/folder
     if p.exists(): shutil.copytree(p,DIST/folder,dirs_exist_ok=True)
