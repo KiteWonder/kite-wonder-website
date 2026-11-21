@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: KiteWonder/kite-wonder-website
+  branch: main
+  # GitHub OAuth requires an external OAuth provider; configure base_url
+  # and auth_endpoint after deploying a trusted OAuth service.
+media_folder: "images/journal"
+public_folder: "/images/journal"
+publish: false
+collections:
+  - name: "posts"
+    label: "Wonder Journal Articles"
+    label_singular: "Article"
+    folder: "content/posts"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publication date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Category", name: "category", widget: "select", options: ["Sensory Play", "Speech & Language", "Child Development", "Movement & Play", "Learning Through Play"]}
+      - {label: "Summary", name: "summary", widget: "text"}
+      - {label: "Cover image", name: "cover", widget: "image", required: false}
+      - {label: "Published", name: "published", widget: "boolean", default: false}
+      - {label: "Article", name: "body", widget: "markdown"}
