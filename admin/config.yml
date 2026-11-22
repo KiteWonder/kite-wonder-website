@@ -1,0 +1,64 @@
+backend:
+  name: github
+  repo: KiteWonder/kite-wonder-website
+  branch: main
+  # Keep the existing Netlify GitHub OAuth provider, including in previews.
+  site_domain: kite-wonder-website.netlify.app
+
+publish_mode: simple
+site_url: https://kite-wonder-website.netlify.app
+display_url: https://kite-wonder-website.netlify.app/journal/
+media_folder: images/journal
+public_folder: /images/journal
+
+collections:
+  - name: posts
+    label: Wonder Journal Articles
+    label_singular: Article
+    description: 'Aby opublikować: włącz Show on website i kliknij Publish. Wyłączony przełącznik oznacza szkic. Po zapisie poczekaj na zakończenie wdrożenia Netlify.'
+    folder: content/posts
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    preview_path: 'journal/{{slug}}/'
+    sortable_fields: [date, title, published]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publication date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+        hint: 'Data widoczna przy artykule. Nie planuje automatycznej publikacji na później.'
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - Movement & Sensory Play
+          - Speech & Connection
+          - Learning Through Play
+          - Sensory Play
+          - Speech & Language
+          - Child Development
+          - Movement & Play
+      - label: Summary
+        name: summary
+        widget: text
+        hint: Krótki opis widoczny na liście artykułów.
+      - label: Cover image
+        name: cover
+        widget: image
+        required: false
+      - label: Show on website
+        name: published
+        widget: boolean
+        default: false
+        required: false
+        hint: 'WŁĄCZONE = artykuł pojawi się na stronie po zapisaniu i wdrożeniu. WYŁĄCZONE = szkic, niewidoczny w Journal. Sam przycisk Publish nie włącza tego przełącznika.'
+      - label: Article
+        name: body
+        widget: markdown

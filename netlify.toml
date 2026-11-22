@@ -1,5 +1,5 @@
 [build]
-  command = "pip install -r requirements.txt && python scripts/build_blog.py"
+  command = "pip install -r requirements.txt && python -m unittest discover -s tests -v && python scripts/build_blog.py"
   publish = "public"
 
 [build.environment]
