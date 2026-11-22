@@ -161,7 +161,7 @@ Because sometimes, a few playful minutes are all you need to get started.
 
 **Explore Playful Minutes on Amazon**
 
-https://www.amazon.com/dp/B0HP5WT63N?plpRedirect=mhFallback
+\[Discover Playful Minutes on Amazon](https://www.amazon.com/dp/B0HP5WT63N)
 
 **About the Author**
 
