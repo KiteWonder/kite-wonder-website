@@ -6,7 +6,8 @@ category: Movement & Sensory Play
 summary: Movement is more than just play. Discover how everyday jumping,
   climbing, balancing, and exploring help children develop body awareness,
   confidence, and essential skills — all through the joy of movement.
-published: false
+cover: /images/journal/0f9deac4-743d-4d90-8f72-49aa19382dee.png
+published: true
 ---
 > ***Why Movement Matters More Than We Think: 5 Simple Ways to Bring Play Into Your Child’s Day***
 
@@ -160,7 +161,7 @@ Because sometimes, a few playful minutes are all you need to get started.
 
 **Explore Playful Minutes on Amazon**
 
-https://www.amazon.com/dp/B0HP5WT63N?plpRedirect=mhFallback
+\[Discover Playful Minutes on Amazon](https://www.amazon.com/dp/B0HP5WT63N)
 
 **About the Author**
 
