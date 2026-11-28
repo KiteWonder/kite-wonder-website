@@ -32,7 +32,7 @@ if os.environ.get('CONTEXT') in ('deploy-preview','branch-deploy'):
     config['collections'][0]['description']='WERSJA PODGLĄDOWA: zapisy trafiają tylko do gałęzi testowej. Nie zmieniają strony publicznej.'
     config_path.write_text(yaml.safe_dump(config,allow_unicode=True,sort_keys=False),encoding='utf-8')
 
-for folder in ['assets','images']:
+for folder in ['assets','images','play']:
     p=ROOT/folder
     if p.exists(): shutil.copytree(p,DIST/folder,dirs_exist_ok=True)
 
@@ -59,7 +59,7 @@ def safe_url(path):
     return p if p.startswith(('/', 'https://','http://')) else '/'+p.lstrip('./')
 
 def doc(title,description,body):
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f5ed"><meta name="description" content="{escape(description,quote=True)}"><title>{escape(title)} | Kite &amp; Wonder</title><style>{CSS}</style></head><body><header><nav class="wrap head" aria-label="Main navigation"><a class="logo" href="/" aria-label="Kite and Wonder home"><img src="/assets/kw-logo.webp" alt="Kite & Wonder"></a><div class="headnav"><a href="/">Our books</a><a href="/journal/">Journal</a></div></nav></header>{body}<footer><div class="wrap"><span>© Kite &amp; Wonder · Play. Explore. Grow.</span><span><a href="/">Books</a> &nbsp; · &nbsp; <a href="/journal/">Journal</a></span></div></footer></body></html>'''
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f5ed"><meta name="description" content="{escape(description,quote=True)}"><title>{escape(title)} | Kite &amp; Wonder</title><style>{CSS}</style></head><body><header><nav class="wrap head" aria-label="Main navigation"><a class="logo" href="/" aria-label="Kite and Wonder home"><img src="/assets/kw-logo.webp" alt="Kite & Wonder"></a><div class="headnav"><a href="/">Our books</a><a href="/journal/">Journal</a><a href="/play/">Play</a></div></nav></header>{body}<footer><div class="wrap"><span>© Kite &amp; Wonder · Play. Explore. Grow.</span><span><a href="/">Books</a> &nbsp; · &nbsp; <a href="/journal/">Journal</a></span></div></footer></body></html>'''
 
 published=[]
 for file in POSTS.glob('*.md'):
